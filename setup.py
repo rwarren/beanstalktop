@@ -1,8 +1,14 @@
 from setuptools import setup
 import os
+import sys
 
 VERSION_FILE = '__version__.py'
 
+if sys.version_info[0] >= 3:
+    BEANSTALKC_MODULE = 'beanstalkc3'
+else:
+    BEANSTALKC_MODULE = 'beanstalkc'
+    
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as file_readme:
     long_description = file_readme.read()
 
@@ -23,7 +29,7 @@ setup(
     },
     py_modules=['beanstalktop'],
     install_requires=[
-        'beanstalkc',
+        BEANSTALKC_MODULE,
         'PyYAML',
     ],
 )
